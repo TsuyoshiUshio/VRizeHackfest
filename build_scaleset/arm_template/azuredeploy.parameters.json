@@ -1,0 +1,42 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"vmSSName": {
+			"value": "buildand"
+		},
+		"instanceCount": {
+			"value": 2
+		},
+		"vmSize": {
+			"value": "Standard_DS2_v2"
+		},
+		"dnsNamePrefix": {
+			"value": "<YOUR DNS NAME PREFIX>"
+		},
+		"adminUsername": {
+			"value": "<YOUR ADMIN USER NAME>"
+		},
+		"adminPassword": {
+			"value": "<YOUR PASSWORD>"
+		},
+		"sourceImageVhdUri": {
+			"value": "/subscriptions/<YOUR SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP>/providers/Microsoft.Compute/images/<IMAGE_NAME>"
+		},
+		"frontEndLBPort": {
+			"value": 80
+		},
+		"backEndLBPort": {
+			"value": 8080
+		},
+		"probeIntervalInSeconds": {
+			"value": 15
+		},
+		"numberOfProbes": {
+			"value": 5
+		},
+		"probeRequestPath": {
+			"value": "/"
+		}
+	}
+}

@@ -1,0 +1,51 @@
+{
+  "variables": {
+    "subscription_id": "<YOUR SUBSCRIPTION ID>",
+    "object_id": "<YOUR OBJECT ID>",
+    "client_secret": "<YOUR CLIENT SECRET>",
+    "client_id": "<YOUR CLIENT ID>",
+    "tenant_id": "<YOUR TENANT ID>",
+    "resource_group_name": "<YOUR RESOURCE GROUP NAME>",
+    "storage_account": "<YOUR STORAGE ACCOUNT NAME>"
+  },
+
+  "builders": [
+    {
+      "type": "azure-arm",
+
+      "subscription_id": "{{user `subscription_id`}}",
+      "object_id": "{{user `object_id`}}",
+      "client_secret": "{{user `client_secret`}}",
+      "client_id": "{{user `client_id`}}",
+      "tenant_id": "{{user `tenant_id`}}",
+      "resource_group_name": "{{user `resource_group_name`}}",
+      "storage_account": "{{user `storage_account`}}",
+
+      "capture_container_name": "images",
+      "capture_name_prefix": "packer",
+      "os_type": "Windows",
+      "image_publisher": "MicrosoftWindowsServer",
+      "image_offer": "WindowsServer",
+      "image_sku": "2012-Datacenter",
+      "azure_tags": {},
+      "location": "japaneast",
+      "vm_size": "Standard_DS2_v2",
+      "communicator": "winrm",
+      "winrm_use_ssl": "true",
+      "winrm_insecure": "true",
+      "winrm_timeout": "3m",
+      "winrm_username": "packer"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "powershell",
+      "script": "provision.ps1"
+    },
+
+    {
+      "type": "windows-shell",
+      "inline": ["%windir%\\system32\\sysprep\\sysprep.exe /generalize /oobe /shutdown"]
+    }
+  ]
+}
